@@ -3,6 +3,7 @@ const dotenv = require("dotenv")
 const morgan = require("morgan")
 const colors = require("colors")
 const connectDB = require("./config/db")
+const errorHandler = require("./middleware/error")
 
 // Load env vars
 dotenv.config({ path: "./config/config.env" })
@@ -29,6 +30,9 @@ app.use(morgan("dev"))
 // Rajoute automatiquement "/api/v1/bootcamps" à mes routes dans routes/bootcamps.js
 // Permet d'économiser du code
 app.use("/api/v1/bootcamps", bootcamps)
+
+// Poser après le Mount routers sinon il ne trouvera pas la route complète
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
