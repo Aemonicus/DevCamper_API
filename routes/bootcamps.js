@@ -10,7 +10,13 @@ const {
   getBootcampsInRadius
 } = require("../controllers/bootcamps")
 
+// Include other resource routers
+const courseRouter = require("./courses")
+
 const router = express.Router()
+
+// Re-route into other resource routers
+router.use("/:bootcampId/courses", courseRouter)
 
 // J'exporte mes routes vers server.js où elles seront "mount"
 // J'ai rajouté aux routes les fonctions récupérées depuis /controllers/bootcamps

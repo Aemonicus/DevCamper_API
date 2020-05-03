@@ -13,6 +13,7 @@ connectDB()
 
 // Route files
 const bootcamps = require("./routes/bootcamps")
+const courses = require("./routes/courses")
 
 const app = express()
 
@@ -30,6 +31,7 @@ app.use(morgan("dev"))
 // Rajoute automatiquement "/api/v1/bootcamps" à mes routes dans routes/bootcamps.js
 // Permet d'économiser du code
 app.use("/api/v1/bootcamps", bootcamps)
+app.use("/api/v1/courses", courses)
 
 // Poser après le Mount routers sinon il ne trouvera pas la route complète
 app.use(errorHandler)
