@@ -1,7 +1,7 @@
 const express = require("express")
 
 // Je récupère mes fonctions pour chaque route depuis /controllers/bootcamps
-const { getReviews, getReview, addReview } = require("../controllers/reviews")
+const { getReviews, getReview, addReview, updateReview, deleteReview } = require("../controllers/reviews")
 
 const Review = require("../models/Review")
 
@@ -16,6 +16,9 @@ router
   .post(protect, authorize('user', 'admin'), addReview)
 
 router
-  .route("/:id").get(getReview)
+  .route("/:id")
+  .get(getReview)
+  .put(protect, authorize("user", "admin"), updateReview)
+  .delete(protect, authorize("user", "admin"), deleteReview)
 
 module.exports = router
